@@ -3,6 +3,7 @@ import { View, Text, Button, ActivityIndicator, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Order from './order';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,16 +15,6 @@ const Home = () => {
     </View>
   );
 }
-
-
-const Order = () => {
-  return (
-    <View>
-    <Text>Order</Text>
-    </View>
-  );
-}
-
 
 const Auction = () => {
   return (
@@ -42,14 +33,6 @@ const LoadingScreen = () => (
 
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // 가상의 로딩 시간을 설정하여 로딩 상태를 조작합니다.
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2초 후에 로딩 상태를 해제합니다.
-  }, []);
 
   return (
     <NavigationContainer>
@@ -59,9 +42,27 @@ const App = () => {
 }
 
 function RootNavigator() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // 가상의 로딩 시간을 설정하여 로딩 상태를 조작합니다.
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2초 후에 로딩 상태를 해제합니다.
+  }, []);
   return (
     <Stack.Navigator>
-      <Stack.Screen name="WalkMeal" component={BottomTabNavigator} />
+      {isLoading ? (
+          <Stack.Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={{ headerShown: false }} // 로딩 화면에서 네비게이션 바를 숨깁니다.
+          />
+        ) : (
+          <>
+            <Stack.Screen name="WalkMeal" component={BottomTabNavigator} />
+          </>
+        )}
     </Stack.Navigator>
   )
 }
