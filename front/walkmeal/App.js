@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Order from './order';
+import Auction from './auction';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -12,14 +13,6 @@ const Home = () => {
   return (
     <View>
     <Text>Home</Text>
-    </View>
-  );
-}
-
-const Auction = () => {
-  return (
-    <View>
-    <Text>Auction</Text>
     </View>
   );
 }
