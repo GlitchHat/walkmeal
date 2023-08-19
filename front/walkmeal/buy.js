@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text} from 'react-native';
 import API from './viewstoreAPI';
 
 const Buy = (props) => {
@@ -21,7 +21,6 @@ const Buy = (props) => {
     return (
         <View>
             <Text>{initdata.title}</Text>
-            <Button title='Buy'/>
         </View>
     )
 }

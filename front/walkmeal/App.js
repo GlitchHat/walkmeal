@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Order from './order';
 import Auction from './auction';
 import Home from './home';
+import handleLogout from './home';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,6 +31,14 @@ const App = () => {
 function RootNavigator() {
   const [isLoading, setIsLoading] = useState(true);
 
+  const LogoImage = () => {
+    return (
+      <View style={{marginLeft: 20}}>
+        <Image source={require('./assets/logo.png')} style={{height:21.37, width:82}}/>
+      </View>
+    );
+  }
+
   useEffect(() => {
     // 가상의 로딩 시간을 설정하여 로딩 상태를 조작합니다.
     setTimeout(() => {
@@ -46,7 +55,18 @@ function RootNavigator() {
           />
         ) : (
           <>
-            <Stack.Screen name="WalkMeal" component={BottomTabNavigator} />
+            <Stack.Screen name="WalkMeal" component={BottomTabNavigator} 
+              options={{
+                headerLeft: () => <LogoImage/>,
+                title:'',
+                headerStyle: {backgroundColor: '#97c387'},
+                headerRight: () => (
+                  <View style={{marginRight: 20}}>
+                    <Text onPress={handleLogout}>Log out</Text>
+                  </View>
+                )
+              }}
+            />
           </>
         )}
     </Stack.Navigator>
@@ -74,13 +94,14 @@ function BottomTabNavigator() {
               : require("./assets/auction-inactive.png");
           }
 
-          return <Image source={iconSource} style={{ width: 20, height: 20 }} />;
+          return <Image source={iconSource} style={{ width: 30, height: 30 }} />;
         },
       })}
+      tabBarOptions={{activeTintColor:'#97c387',inactiveTintColor:'black'}}
     >
-      <Tab.Screen name="Order" component={Order}/>
-      <Tab.Screen name="Home" component={Home}/>
-      <Tab.Screen name="Auction" component={Auction}/>
+      <Tab.Screen name="Order" component={Order} options={{headerShown: false}}/>
+      <Tab.Screen name="Home" component={Home} options={{headerShown: false}}/>
+      <Tab.Screen name="Auction" component={Auction} options={{headerShown: false}}/>
     </Tab.Navigator>
   )
 }

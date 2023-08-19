@@ -24,10 +24,11 @@ const Order = () => {
     }
   };
 
-  const submit = () => {
-    
-  }
+  const [detail, setDetail] = useState(false);
 
+  const  showdetail= () => {
+      setDetail(!detail);
+  }
 
 
   return (
@@ -37,11 +38,24 @@ const Order = () => {
           key={item.id}
           style={styles.box}
         >
-          <Text style={styles.name}>{item.title}</Text>
-          <Text>{item.subtitle}</Text>
-          <Text>{item.time}</Text>
-          <Text>{item.distance}km</Text>
-          <Button title='Buy' onPress={<Buy id={item.id}/>}/>
+          {!detail ? (
+            <>
+              <Text style={styles.name}>{item.title}</Text>
+              <Text>{item.subtitle}</Text>
+              <Text>{item.time}</Text>
+              <Text>{item.distance}km</Text>
+              <Button title='Buy' onPress={showdetail}/>
+            </>
+          ) : (
+              <>
+                <Buy id={item.id}/>
+                <Button title='Buy' onPress={showdetail}/>
+                <Text></Text>
+                <Button title='back' onPress={showdetail}/>
+              </>
+          )}
+
+          
         </TouchableOpacity>
       ))}
     </View>

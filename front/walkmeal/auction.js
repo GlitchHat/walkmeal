@@ -34,9 +34,9 @@ const Auction = () => {
       });
 
       setData(updatedData);
-      alert('경매금액을 성공적으로 입력하였습니다!');
+      alert('경매 금액을 성공적으로 입력하였습니다!');
     } else {
-      alert('경매 최소 금액보다 높게 작성해주세요');
+      alert('현재 경매 금액보다 높게 작성해주세요');
     }
   }
 
@@ -63,7 +63,7 @@ const Auction = () => {
             onChangeText={text => handleCoinChange(item.id, parseInt(text, 10))}
             keyboardType="numeric"
           />
-          <Button title="Buy" onPress={() => valuecheck(item.coin, item.sale_price, item.id)} />
+          <Button title="Buy" color="#97c387" onPress={() => valuecheck(item.coin, item.sale_price, item.id)} />
         </View>
       ))}
     </View>
