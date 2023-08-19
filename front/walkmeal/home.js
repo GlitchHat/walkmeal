@@ -1,16 +1,27 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { styles } from './homecss';
+import Modal from 'react-native-modal';
 
 const Home = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
+    const [isLoginPageVisible,setIsLoginPageVisible] = useState(false);
+
+    const toggleLogin = () => {
+        setIsLoginPageVisible(!isLoginPageVisible);
+    }
 
     const handleLogin = () => {
+        if (username && password) {
+            setIsLoginPageVisible(false);
+        }
         // 로그인 처리 로직 (예: 서버 요청 등)
         // 로그인이 성공하면 setIsLoggedIn(true) 및 setUserInfo(userdata) 호출
         setIsLoggedIn(true);
-        setUserInfo({ username: "exampleUser", email: "user@example.com" });
+        setUserInfo({ username: "exampleUser", email: "user@example.com" , totalSteps : 1980, dailySteps : 180});
     };
 
     const handleLogout = () => {
@@ -23,6 +34,25 @@ const Home = () => {
     return(
         <View style={styles.container}>
             <View style={styles.box}>
+                <Modal isVisible={isLoginPageVisible}>
+                    <View>
+                        <TextInput
+                            placeholder="Id"
+                            value={username}
+                            onChangeText={text => setUsername(text)}
+                        />
+                        <TextInput
+                            placeholder="Pw"
+                            secureTextEntry={true}
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                        />
+                        <Button title="Login" onPress={handleLogin} />
+                        <Button title="Close" onPress={toggleLogin} />
+                    </View>
+                </Modal>
+            </View>
+            <View style={styles.box}>
                 <Text style={styles.title}>Profile</Text>
                 {isLoggedIn ? (
                     <View>
@@ -33,13 +63,22 @@ const Home = () => {
                 ) : (
                 <View>
                     <Text>Please Login</Text>
-                    <Button title="Login" onPress={handleLogin} />
+                    <Button title="Login" onPress={toggleLogin} />
                 </View>
                 )}
             </View>
             <View style={styles.box}>
                 <Text style={styles.title}>Total Steps🦶</Text>
-                <Text style={styles.content}>Login First!</Text>
+                {isLoggedIn ? (
+                    <View>
+                        <Text>{userInfo.totalSteps}</Text>
+                        <Text>Today. {userInfo.dailySteps}</Text>
+                    </View>
+                ) : (
+                <View>
+                    <Text>Please Login</Text>
+                </View>
+                )}
             </View>
             <View style={styles.box}>
                 <Text style={styles.title}>Auction Menu</Text>

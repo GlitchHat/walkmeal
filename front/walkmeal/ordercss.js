@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     width: 300,
   },
   name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center', // 텍스트 가운데 정렬
+    fontSize: 21,
+    fontWeight: 'bold' // 텍스트 가운데 정렬
   },
+
 });
