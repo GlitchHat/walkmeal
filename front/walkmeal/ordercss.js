@@ -17,5 +17,8 @@ export const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: 'bold' // 텍스트 가운데 정렬
   },
+  button: {
+    marginTop: 17
+  }
 
 });

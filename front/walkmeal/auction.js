@@ -8,14 +8,14 @@ const Auction = () => {
   const initdata = [
     {
       id: "1",
-      name: "치킨",
+      name: "Chicken auction begins!",
       sale_price: 10,
       org_price: 20000,
       coin: 0
     },
     {
       id: "2",
-      name: "햄버거",
+      name: "Hamburger",
       sale_price: 10,
       org_price: 7500,
       coin: 0
@@ -34,9 +34,9 @@ const Auction = () => {
       });
 
       setData(updatedData);
-      alert('경매 금액을 성공적으로 입력하였습니다!');
+      alert('Auction amount has been successfully entered!');
     } else {
-      alert('현재 경매 금액보다 높게 작성해주세요');
+      alert('Please enter an amount higher than the current auction price');
     }
   }
 
@@ -55,10 +55,10 @@ const Auction = () => {
     <View style={styles.container}>
       {data.map(item => (
         <View style={styles.box} key={item.id}>
-          <Text style={styles.name}>{item.name} 경매 시작!</Text>
-          <Text>현재 {item.sale_price}원 - 현재 나의 배팅가</Text>
+          <Text style={styles.name}>{item.name} auction begins!</Text>
+          <Text>Currently {item.sale_price}won - Current bidding price from me</Text>
           <TextInput
-            placeholder='금액을 입력하세요'
+            placeholder='Please enter the amount'
             value={item.coin.toString()}
             onChangeText={text => handleCoinChange(item.id, parseInt(text, 10))}
             keyboardType="numeric"

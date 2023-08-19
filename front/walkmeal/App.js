@@ -7,6 +7,7 @@ import Order from './order';
 import Auction from './auction';
 import Home from './home';
 import handleLogout from './home';
+import AppNavigator from './AppNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -99,7 +100,7 @@ function BottomTabNavigator() {
       })}
       tabBarOptions={{activeTintColor:'#97c387',inactiveTintColor:'black'}}
     >
-      <Tab.Screen name="Order" component={Order} options={{headerShown: false}}/>
+      <Tab.Screen name="Order" component={AppNavigator} options={{headerShown: false}}/>
       <Tab.Screen name="Home" component={Home} options={{headerShown: false}}/>
       <Tab.Screen name="Auction" component={Auction} options={{headerShown: false}}/>
     </Tab.Navigator>
